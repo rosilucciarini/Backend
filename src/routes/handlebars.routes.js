@@ -1,6 +1,6 @@
 import express from "express"
 const router = express.Router(); 
-import ProductManager from "../controllers/product-manager.js";
+import ProductManager from "../dao/fs/product-manager.js";
 const productManager = new ProductManager("./src/models/productos.json");
 
 router.get("/", async (req, res) => {

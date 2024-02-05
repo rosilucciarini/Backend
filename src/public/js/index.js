@@ -17,8 +17,9 @@ const renderProductos = (productos) => {
         //Agregamos boton para eliminar: 
         card.innerHTML = `
                 <p class ="p1">Id ${item.id} </p>
+                
                 <p class ="p2">${item.title} </p>
-                <p class ="p2">Precio ${item.price} </p>
+                <p class ="p2">Precio $${item.price} </p>
                 <button class ="buttons"> Eliminar Producto </button>
         
         `;
@@ -38,7 +39,7 @@ const eliminarProducto = (id) => {
 
 //Agregar producto:
 
-document.getElementById("btnEnviar").addEventListener("click", () => {
+document.getElementById("send-button").addEventListener("click", () => {
     agregarProducto();
 });
 

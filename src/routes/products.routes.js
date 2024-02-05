@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import ProductManager from "../controllers/product-manager.js";
+import ProductManager from "../dao/db/product-manager-db.js";
 const manager = new ProductManager("./src/models/products.json");
 
 

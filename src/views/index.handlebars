@@ -16,10 +16,11 @@
     {{#each productos}}
     <div class="card">
         <figure>
-            <img src={{this.thumbnails.imagen1}}>
+            <img src={{this.thumbnail.[0].imagen1}}>
         </figure>
         <div class="contenido">
             <h3>{{this.title}} </h3>
+            
             <p>{{this.description}} </p>
             <p>${{this.price}} </p>
         </div>
