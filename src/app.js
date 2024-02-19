@@ -5,19 +5,28 @@ import hdsRouter from "./routes/handlebars.routes.js"
 import exphbs from "express-handlebars";
 import __dirname from "./utils.js";
 import * as path from "path";
-import { Server } from "socket.io";
-import ProductManager from "./dao/fs/product-manager.js";
-import mongoose from "./database.js"
+
+import ProductManager from "./dao/db/product-manager-db.js";
+import connectMongoose from "./dao/db/database.js";
+
 
 const app = express();
 const PORT = 8080;
+connectMongoose;
 
-const productManager = new ProductManager("./src/models/products.json");
-
+//const productManager = new ProductManager();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/", express.static(__dirname + "/public"));
+
+
+const hbs = exphbs.create({
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true,
+  },
+})
 
 
 app.engine("handlebars", exphbs.engine());

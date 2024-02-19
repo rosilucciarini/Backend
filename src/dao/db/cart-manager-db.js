@@ -1,52 +1,52 @@
-const CartModel = require("../models/cart.model.js");
+import CartModel from "../models/cart.model.js"
 
 class CartManager {
-    async crearCarrito() {
+    async createCart() {
         try {
-            const nuevoCarrito = new CartModel({products: []});
-            await nuevoCarrito.save(); 
-            return nuevoCarrito; 
+            const newCart = new CartModel({products: []});
+            await newCart.save(); 
+            return newCart; 
         } catch (error) {
-            console.log("Error al crear el nuevo carrinho de compriñas");
+            console.log("Error al crear el nuevo carrito de compras");
         }
     }
 
-    async getCarritoById(cartId) {
+    async getCarritoById(id) {
         try {
-            const carrito = await CartModel.findById(cartId);
-                if(!carrito) {
-                    console.log("No existe ese carrito con el id");
+            const cart = await CartModel.findById(id);
+                if(!cart) {
+                    console.log("No se encontro el carrito");
                     return null;
                 }
 
-            return carrito;
+            return cart;
         } catch (error) {
-            console.log("Error al traer el carrito, fijate bien lo que haces", error);
+            console.log("Error al buscar el Id del carrito");
         }
     }
 
-    async agregarProductoAlCarrito(cartId, productId, quantity = 1) {
+    async addProductToCaert(cid, pid, quantity = 1) {
         try {
-            const carrito = await this.getCarritoById(cartId); 
-            const existeProducto = carrito.products.find(item => item.product.toString() === productId);
+            const cart = await this.getCarritoById(cid); 
+            const productExist = cart.products.find(item => item.product.toString() === pid);
 
-            if(existeProducto) {
-                existeProducto.quantity += quantity;
+            if(productExist) {
+                productExist.quantity += quantity;
             } else {
-                carrito.products.push({product: productId, quantity});
+                cart.products.push({product: pid, quantity});
             }
 
             //Vamos a marcar la propiedad "products" como modificada antes de guardar: 
-            carrito.markModified("products");
+            cart.markModified("products");
 
-            await carrito.save();
-            return carrito;
+            await cart.save();
+            return cart;
             
         } catch (error) {
-            console.log("error al agregar un producto", error);
+            console.log("Error al cargar productos al carrito");
         }
     }
 
 }
 
-module.exports = CartManager; 
+export default CartManager; 

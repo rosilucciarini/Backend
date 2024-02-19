@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 //Creamos el schema y el model de productos: 
 
@@ -15,9 +15,7 @@ const productSchema = new mongoose.Schema({
         type: Number, 
         required: true
     },
-    img: {
-        type: String, 
-    },
+
     code: {
         type: String, 
         required: true,
@@ -38,10 +36,10 @@ const productSchema = new mongoose.Schema({
     thumbnails: {
         type: [String], 
     },
-})
+});
 
 const ProductModel = mongoose.model("products", productSchema);
 //la convención general es hacerlo en PascalCase. 
 
 
-module.exports = ProductModel;
+export default ProductModel;
